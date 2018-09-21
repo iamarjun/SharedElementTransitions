@@ -1,0 +1,26 @@
+package com.alwaysbaked.sharedelementtransitions
+
+import android.content.Intent
+import android.support.v7.app.AppCompatActivity
+import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        sharedElement.setOnClickListener {
+            val intent = Intent(this, Main2Activity::class.java)
+            val bundle = ActivityOptionsCompat.makeSceneTransitionAnimation(this, sharedElement, "mmt").toBundle()
+            startActivity(intent, bundle)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        supportFinishAfterTransition()
+    }
+}
